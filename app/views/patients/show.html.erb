@@ -1,0 +1,16 @@
+<h1>Show Patient</h1>
+
+<p>Name:  <%= @patient.name %></p>
+<p>Contact No: <%= @patient.contact_no %>
+<p>Address: <%= @patient.address %></p>
+
+<h3>Appointments</h3>\
+
+<% appointments = @patient.appointments %>
+
+  <ul>
+    <% appointments.each do |appointment| %>
+      <li><<%= appointment.name %></li>
+    <% end %>
+  </ul>
+<%= link_to 'Back', patients_path %>

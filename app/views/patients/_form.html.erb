@@ -1,0 +1,15 @@
+<%= form_for patient do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <br><br>
+
+  <%= f.label :contact_no, "Contact No" %>
+  <%= f.number_field :contact_no %>
+  <br><br>
+
+  <%= f.label :address, "Address" %>
+  <%= f.text_area :address %>
+  <br><br>
+
+  <%= f.submit %>
+<% end %>
