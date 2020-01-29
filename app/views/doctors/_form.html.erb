@@ -10,6 +10,16 @@
   <%= f.label :speciality, "Speciality" %>
   <%= f.text_field :speciality %>
   <br><br>
+  <%= f.label :from_time, "From" %>
+  <%= f.time_field :from_time %>
+  <br><br>
+  <%= f.label :to_time, 'TO' %>
+  <%= f.time_field :to_time %>
+  <br><br>
+  <%= f.fields_for :profile, doctor.profile do |profile_fields| %>
+    <%= profile_fields.label :dob, 'DOB' %>
+    <%= profile_fields.date_field :dob %>
+  <% end %>
 
   <%= f.submit %>
 <% end %>

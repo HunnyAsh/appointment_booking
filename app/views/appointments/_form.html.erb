@@ -1,0 +1,13 @@
+<%= form_for appointment, url: patient_appointments_path do |f| %>
+  <%= render 'shared/error_messages', resource: appointment %>
+  <%= f.label :date, "Date" %>
+  <%= f.date_field :date %>
+  <br>
+  <%= f.label :time, 'Time' %>
+  <%= f.time_field :time %>
+  <br>
+  <%= f.label :doctor_id, 'Doctor' %>
+  <%= f.select :doctor_id, options_for_select(doctor_names, selected: appointment.doctor) %>
+  <br>
+  <%= f.submit %>
+<% end %>

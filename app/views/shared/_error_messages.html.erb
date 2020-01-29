@@ -1,0 +1,5 @@
+<% if resource.errors.any? %>
+  <div>
+    <%= resource.errors.full_messages.join(', ') %>
+  </div>
+<% end %>

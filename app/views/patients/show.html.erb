@@ -4,13 +4,17 @@
 <p>Contact No: <%= @patient.contact_no %>
 <p>Address: <%= @patient.address %></p>
 
-<h3>Appointments</h3>\
+<h3>Appointments</h3>
 
 <% appointments = @patient.appointments %>
-
+<% if appointments.present? %>
   <ul>
     <% appointments.each do |appointment| %>
-      <li><<%= appointment.name %></li>
+      <li><%= appointment.doctor.name || appointment.doctor.email %><%= appointment.patient.name || appointment.patient.email %><%= appointment.date %></li>
     <% end %>
   </ul>
+<% else %>
+  <h3>No appointments found</h3>
+<% end %>
+<%= link_to "Edit Profile", edit_patient_path(@patient) %>
 <%= link_to 'Back', patients_path %>

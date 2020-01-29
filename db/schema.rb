@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_26_055451) do
+ActiveRecord::Schema.define(version: 2020_01_29_013103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
     t.date "date"
-    t.time "time"
+    t.datetime "time"
     t.bigint "doctor_id"
     t.bigint "patient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accept", default: false
     t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
@@ -32,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_01_26_055451) do
     t.string "speciality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "from_time"
+    t.datetime "to_time"
+    t.index ["email"], name: "index_doctors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_doctors_on_reset_password_token", unique: true
   end
 
   create_table "patients", force: :cascade do |t|
@@ -40,6 +50,13 @@ ActiveRecord::Schema.define(version: 2020_01_26_055451) do
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_patients_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -47,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_01_26_055451) do
     t.string "profileable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "dob"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable_type_and_profileable_id"
   end
 

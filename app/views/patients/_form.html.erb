@@ -1,4 +1,4 @@
-<%= form_for patient do |f| %>
+<%= form_for patient, url: patient_path(patient) do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
   <br><br>
@@ -10,6 +10,11 @@
   <%= f.label :address, "Address" %>
   <%= f.text_area :address %>
   <br><br>
+
+  <%= f.fields_for :profile, patient.profile do |profile_fields| %>
+    <%= profile_fields.label :dob, 'DOB' %>
+    <%= profile_fields.date_field :dob %>
+  <% end %>
 
   <%= f.submit %>
 <% end %>

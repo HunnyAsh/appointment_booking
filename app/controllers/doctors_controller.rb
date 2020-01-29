@@ -26,7 +26,7 @@ class DoctorsController < ApplicationController
 
   def update
     if @doctor.update(doctor_params)
-      redirect_to doctors_path, notice: 'Doctor updated successfully!!'
+      redirect_to edit_doctor_path(@doctor), notice: 'Doctor updated successfully!!'
     else
       render :edit, notice: 'Doctor not updated. Try again!!'
     end
@@ -47,6 +47,6 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.require(:doctor).permit(:name, :contact_no, :speciality)
+    params.require(:doctor).permit(:name, :contact_no, :speciality, :from_time, :to_time, profile_attributes: [ :dob ])
   end
 end

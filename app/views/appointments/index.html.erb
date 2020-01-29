@@ -1,0 +1,43 @@
+<h1>Appointments</h1>
+
+<table>
+  <thead>
+    <th>Doctor</th>
+    <th>Patient</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Accept/Reject</th>
+  </thead>
+  <tbody>
+    <% if @appointments.present? %>
+      <% @appointments.each do |appointment| %>
+        <tr>
+          <td><%= appointment.doctor.name || appointment.doctor.email %></td>
+          <td><%= appointment.patient.name || appointment.patient.email %></td>
+          <td><%= appointment.date %></td>
+          <td><%= appointment.time.strftime('%H:%M') %></td>
+          <td>
+            <% if @resource.is_a?(Doctor) %>
+              <% if appointment.accept %>
+                <%= link_to "Reject", doctor_appointment_accept_path(doctor_id: appointment.doctor, appointment_id: appointment, accept: false) %>
+              <% else %>
+                <%= link_to "Accept", doctor_appointment_accept_path(doctor_id: appointment.doctor, appointment_id: appointment, accept: true) %>
+              <% end %>
+            <% else %>
+              <td><%= appointment.accept ? 'Accepted' : 'Rejected' %></td>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% if current_doctor || current_patient %>
+        <p>No records found</p>
+      <% else %>
+        <%= link_to 'Login to book appointment' , new_doctor_session_path %>
+      <% end %>
+      <% end %>
+  </tbody>
+</table>
+<% if @resource.is_a?(Patient) %>
+  <%= link_to "Book Appointment", new_patient_appointment_path(@resource) %>
+<% end %>

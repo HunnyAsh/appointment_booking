@@ -1,0 +1,18 @@
+<h1><%= @resource.class %> Profile</h1>
+
+<%= form_for @resource, url: patient_path(@resource) do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :contact_no, 'contact_no' %>
+  <%= f.number_field :contact_no %>
+  <br>
+  <%= f.label :address, 'address' %>
+  <%= f.text_area :address %>
+  <br>
+  <%= f.fields_for :profile, @resource.profile do |profile_form| %>
+
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

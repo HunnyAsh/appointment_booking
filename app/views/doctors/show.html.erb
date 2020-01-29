@@ -7,10 +7,15 @@
 <h3>Appointments</h3>
 
 <% appointments = @doctor.appointments %>
-
-  <ul>
-    <% appointments.each do |appointment| %>
-      <li><<%= appointment.name %></li>
-    <% end %>
-  </ul>
-<%= link_to 'Back', doctors_path %>
+<% if appointments.present? %>
+<ul>
+  <% appointments.each do |appointment| %>
+  <li>
+    <%= appointment.doctor.name || appointment.doctor.email %><%= appointment.patient.name || appointment.patient.email %><%= appointment.date %>
+  </li>
+  <% end %>
+</ul>
+<% else %>
+<h3>No appointments found</h3>
+<% end %>
+<%= link_to "Edit Profile", edit_doctor_path(@doctor) %>

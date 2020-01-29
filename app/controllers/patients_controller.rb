@@ -26,7 +26,7 @@ class PatientsController < ApplicationController
 
   def update
     if @patient.update(patient_params)
-      redirect_to patients_path, notice: 'Patient updated successfully!!'
+      redirect_to edit_patient_path(@patient), notice: 'Patient updated successfully!!'
     else
       render :edit, notice: 'Patient not updated. Try again!!'
     end
@@ -47,6 +47,6 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:name, :contact_no, :address)
+    params.require(:patient).permit(:name, :contact_no, :address, profile_attributes: [ :dob ])
   end
 end
